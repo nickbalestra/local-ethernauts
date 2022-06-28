@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import helper from "./CoinFlipHelper"
+import helper from "./CoinFlipHelper";
 
 let victim: any;
 let attacker: any;
@@ -10,6 +10,8 @@ describe("Attacking CoinFlip", function () {
     const Victim = await ethers.getContractFactory("CoinFlip");
     victim = await Victim.deploy();
     const Attacker = await ethers.getContractFactory("AttackingCoinFlip");
+    // passing the victim address to the constructor of AttackingCoinFlip
+    // so that the attacker can mimick the coinflip of the victim and guess it
     attacker = await Attacker.deploy(victim.address);
   });
 
