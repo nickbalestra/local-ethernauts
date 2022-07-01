@@ -23,6 +23,8 @@ describe("Attacking King", function () {
   // Get this to pass!
   it("Succesfully become and remain the king forever", async () => {
     await attacker.hackContract({ gasLimit: 30000000 });
+    let king = await victim._king();
+    expect(king).to.equal(attacker.address);
     try {
       await kingPlayer.sendTransaction({
         value: ethers.utils.parseEther("100"),
@@ -32,7 +34,7 @@ describe("Attacking King", function () {
     } catch (error) {
       console.log("error: ", error);
     }
-    const king = await victim._king();
+    king = await victim._king();
     expect(king).to.not.equal(kingPlayer.address);
   });
 });
